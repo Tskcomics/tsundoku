@@ -1,0 +1,44 @@
+GET http://localhost:9090/products HTTP/1.1
+Accept: application/json
+
+######
+
+POST http://localhost:9090/products/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "titolo": "Amazing Spider-Man #832",
+    "editore": "Panini",
+    "categoria": "americano",
+    "sottocategoria": "spillato",
+    "quantità": 2,
+    "prezzo_acquisto": 2.90,
+    "prezzo_vendita": 5.00,
+    "isbn": "9771124226904" 
+}
+
+######
+
+PATCH http://localhost:9090/products/658076fb704e158ba1981bc1 HTTP/1.1
+Content-Type: application/json
+
+    {
+      "_id": "658076fb704e158ba1981bc1",
+      "titolo": "Yuti is My Job #5",
+      "editore": "Star Comics",
+      "categoria": "Manga",
+      "sottocategoria": "Yuri",
+      "quantità": 1,
+      "prezzo_acquisto": 3.2,
+      "prezzo_vendita": 6,
+      "isbn": "9788822644305",
+      "createdAt": "2023-12-18T16:44:43.761Z",
+      "updatedAt": "2023-12-18T17:59:11.960Z",
+      "__v": 0
+    }
+
+######
+
+DELETE  http://localhost:9090/products/658021be54f37a67ab27a278 HTTP/1.1
+
+#####

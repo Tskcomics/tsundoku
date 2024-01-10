@@ -1,0 +1,13 @@
+GET http://localhost:9090/user HTTP/1.1
+
+######
+
+POST http://localhost:7575/users/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Denise",
+    "password": "ammazzachemazza"
+}
+
+######
