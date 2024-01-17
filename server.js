@@ -23,10 +23,14 @@ const connectDB = async () => {
 
 import usersRoute from "./Routes/users.js";
 import productsRoute from "./Routes/products.js"
+import customersRoute from "./Routes/customers.js"
+import subscriptionsRoute from "./Routes/subscriptions.js";
 import loginRoute from "./Routes/login.js";
 
 server.use("/", usersRoute)
 server.use("/", productsRoute)
+server.use("/", customersRoute)
+server.use("/", subscriptionsRoute)
 server.use("/", loginRoute)
 
 const db = mongoose.connection

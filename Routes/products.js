@@ -18,22 +18,26 @@ products.get("/products", cacheMiddleware, async (req, res) => {
 
         if (!products) {
             return res.status(404).send({
-                message: "Posts not found",
+                message: "Prodotti non trovati.",
                 statusCode: 404
             })
         }
+
         res.status(200).send({
-            message: "Posts found",
+            message: "Prodotti trovati.",
             statusCode: 200,
             totalProducts,
             products
         })
+
     } catch (error) {
-        res.status(500).send({
-            message: "Internal server error",
-            statusCode: 500,
-            error
-        })
+        if (error) {
+            res.status(500).send({
+                message: "Errore interno del server.",
+                statusCode: 500,
+                error
+            })
+        }
     }
 })
 
@@ -64,7 +68,7 @@ products.get("/products/:id", cacheMiddleware, async (req, res) => {
     }
 })
 
-products.post("/products", async (req, res) => {
+products.post("/products", cacheMiddleware, async (req, res) => {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
@@ -110,7 +114,7 @@ products.post("/products", async (req, res) => {
     }
 })
 
-products.patch("/products/:id", async (req, res) => {
+products.patch("/products/:id", cacheMiddleware, async (req, res) => {
     const { id } = req.params
     const productExists = await ProductsModel.findById(id)
 
@@ -142,7 +146,7 @@ products.patch("/products/:id", async (req, res) => {
     }
 })
 
-products.delete("/products/:id", async (req, res) => {
+products.delete("/products/:id", cacheMiddleware, async (req, res) => {
     const { id } = req.params
     const productExists = await ProductsModel.findById(id)
 
