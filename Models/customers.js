@@ -23,29 +23,16 @@ const customersSchema = new mongoose.Schema({
   },
   nr_tessera: {
     type: String,
-    required: false,
-    default: ""
+    required: false
   },
   pti_tessera: {
     type: String,
-    required: false,
-    default: ""
+    required: false
   },
-  abbonamenti: [
-    {
-      serie: {
-        type: String,
-        required: false
-      },
-      note: {
-        type: String,
-        required: false
-      }
-    }
-  ]
+  abbonamenti: []
 }, {
   timestamps: true,
-  strict: false
+  strict: true
 })
 
 const customersModel = mongoose.model("CustomersModel", customersSchema, "customers")

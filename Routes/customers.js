@@ -67,13 +67,13 @@ customers.get("/customers/:id", cacheMiddleware, async (req, res) => {
   }
 })
 
-customers.post("/customers", cacheMiddleware, async (req, res) => {
+customers.post("/customers/new", async (req, res) => {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
     return res.status(400).send({
       errors: errors.array(),
-      statusCode: 404
+      statusCode: 400
     })
   }
 
@@ -84,14 +84,15 @@ customers.post("/customers", cacheMiddleware, async (req, res) => {
     email: req.body.email,
     nr_casella: req.body.nr_casella,
     nr_tessera: req.body.nr_tessera,
-    pti_tessera: req.body.pti_tessera
+    pti_tessera: req.body.pti_tessera,
+    abbonamenti: req.body.abbonamenti
   })
 
   try {
-    const customerExists = await customersModel.findOne({ nr_casella: req.body.nr_casella })
+    const customerExists = await customersModel.findOne({ email: req.body.email })
     if (customerExists) {
       return res.status(409).send({
-        message: "Casella già assegnata ad un altro cliente.",
+        message: "Email già assegnata ad un altro cliente.",
         statusCode: 409
       })
     }

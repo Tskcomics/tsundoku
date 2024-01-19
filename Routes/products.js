@@ -5,7 +5,7 @@ import cacheMiddleware from "../Middlewares/cacheMiddleware.js"
 
 const products = express.Router()
 
-products.get("/products", cacheMiddleware, async (req, res) => {
+products.get("/products", async (req, res) => {
     const { page = 1, pageSize = 1000000000 } = req.query
     try {
         const products = await ProductsModel.find()
@@ -68,7 +68,7 @@ products.get("/products/:id", cacheMiddleware, async (req, res) => {
     }
 })
 
-products.post("/products", cacheMiddleware, async (req, res) => {
+products.post("/products", async (req, res) => {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
